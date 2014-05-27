@@ -11,15 +11,7 @@ set :pty, true
 set :format, :pretty
 
 
-require 'bundler/capistrano'
-require 'rvm/capistrano'
-
-set :rvm_ruby_string, "ruby-2.0.0p481"
-set :rvm_type, 'webadmin'
-
-
-
-# Default branch is :master
+#Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
