@@ -61,8 +61,8 @@ namespace :deploy do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
        #Here we can do anything such as:
          within release_path do
-         execute :rake, 'db:migrate' 'rails s'
-	
+         execute :rake, 'db:migrate' #'rails s'
+	 execute :rails, 's'
 	 #execute 'rails s'
        end
     end
