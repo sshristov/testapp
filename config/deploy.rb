@@ -46,6 +46,19 @@ set :format, :pretty
 
 namespace :deploy do
 
+desc 'Runs rake db:create'
+    task :create => [:set_rails_env] do
+      on primary fetch(:migration_role) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, "db:create RAILS_ENV=#{fetch(:rails_env)}"
+          end
+        end
+      end
+    end
+
+
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -54,7 +67,6 @@ namespace :deploy do
     end
   end
   after :publishing, :restart
-after "deploy", "deploy:migrate"
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
