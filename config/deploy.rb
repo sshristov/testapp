@@ -72,7 +72,7 @@ desc 'Runs rake db:create'
   end
 
 end
-
+after :restart, migrate
 
 desc 'Runs rake db:migrate'
     task :migrate => [:set_rails_env] do
