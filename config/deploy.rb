@@ -54,6 +54,10 @@ desc 'Runs rake db:create'
       end
     end
 
+task :run_migrations, :roles => :db do
+        puts "RUNNING DB MIGRATIONS"
+        run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env} --trace"
+    end
 
 
   desc 'Restart application'
