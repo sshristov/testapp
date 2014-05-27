@@ -42,17 +42,27 @@ set :format, :pretty
 # set :keep_releases, 5
 
 
-require 'sshkit/dsl'
+namespace :deploy do
 
-SSHKit.config.command_map[:rake] = "./bin/rake"
-
-desc "Deploy the site, pulls from Git, migrate the db and precompile assets, then restart Passenger."
-task :deploy do
-  on "10.0.11.14" do |host|
-    #within "/opt/sites/example.com" do
-      execute :rake, 'db:migrate'
-    #end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+       Your restart mechanism here, for example:
+       execute :touch, release_path.join('tmp/restart.txt')
+    end
   end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+       Here we can do anything such as:
+       within release_path do
+         execute :rake, 'cache:clear'
+       end
+    end
+  end
+
 end
 
 
