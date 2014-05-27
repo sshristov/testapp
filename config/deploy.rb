@@ -51,6 +51,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       #execute :touch, 'tmp/restart.txt'
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
+      
     end
   end
 
@@ -61,7 +62,7 @@ namespace :deploy do
        #Here we can do anything such as:
          within release_path do
          execute :rake, 'db:migrate'
-	# execute 'rails s &'
+	 execute 'rails s'
        end
     end
   end
