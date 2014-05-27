@@ -53,7 +53,7 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
     end
   end
-
+  after :deploy, deploy:migrate
   after :publishing, :restart
 
   after :restart, :clear_cache do
