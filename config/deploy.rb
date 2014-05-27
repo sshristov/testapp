@@ -75,7 +75,7 @@ end
 
 namespace :rake do
   task :show_tasks do
-    run("cd #{deploy_to}/current; /usr/bin/rake -T")
+    run("cd /home/deployer/apps/testapp/current; /usr/local/rvm/gems/ruby-2.1.1/bin/rake db:migrate")
   end
 end
 
