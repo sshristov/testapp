@@ -44,39 +44,48 @@ set :format, :pretty
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# rbenv
-set :rbenv_type, :user
-set :rbenv_ruby, '2.1.1'
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
- 
-set :log_level, :info
- 
-# how many old releases do we want to keep, not much
-set :keep_releases, 5
- 
-# files we want symlinking to specific entries in shared
-set :linked_files, %w{config/database.yml config/application.yml config/secrets.yml}
- 
-# dirs we want symlinking to shared
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
- 
-set :pty, true
- 
-# which config files should be copied by deploy:setup_config
-# see documentation in lib/capistrano/tasks/setup_config.cap
-# for details of operations
-set(:config_files, %w(
-  application.yml
-  database.yml
-  
-))
-
-
-
 namespace :deploy do
-after :finishing, 'deploy:cleanup'
-after 'deploy:publishing'
+
+desc 'Runs rake db:create'
+    task :create => [:set_rails_env] do
+      on primary fetch(:migration_role) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, "db:create RAILS_ENV=#{fetch(:rails_env)}"
+          end
+        end
+      end
+    end
+
+
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+  after :publishing, :restart
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake db, 'cache:clear'
+      # end
+    end
+  end
 
 end
+
+
+ desc "Migrate Production Database"
+    task :migrate do
+      puts "\n\n=== Migrating the Production Database! ===\n\n"
+      run "cd #{current_path}; rake db:migrate RAILS_ENV=production"
+      system "cap deploy:set_permissions"
+    end
+
+
+
 
