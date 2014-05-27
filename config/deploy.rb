@@ -62,21 +62,22 @@ namespace :deploy do
        #Here we can do anything such as:
          within release_path do
          execute :rake, 'db:migrate'
-	  within release_path do
-	 execute 'rails s'
+	 # within release_path do
+	 #execute 'rails s'
        end
     end
   end
+  
   after :restart, :runtestapp
   after :runtestapp, :clear_cache do
-  on roles(:web), in: :groups, limit: 3, wait: 10 do
+   on roles(:web), in: :groups, limit: 3, wait: 10 do
      #Here we can do anything such as:
        #within release_path do
        #execute :rake, 'db:migrate'
        within release_path do
-       execute 'rails s'
+        execute 'rails s'
+       end
      end
   end
-end
 
 end
