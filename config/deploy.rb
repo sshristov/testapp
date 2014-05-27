@@ -50,11 +50,7 @@ desc "Deploy the site, pulls from Git, migrate the db and precompile assets, the
 task :deploy do
   on "10.0.11.14" do |host|
     #within "/opt/sites/example.com" do
-      execute :git, :pull
-      execute :bundle, :install, '--deployment'
       execute :rake, 'db:migrate'
-      execute :rake, 'assets:precompile'
-      execute :touch, 'tmp/restart.txt'
     #end
   end
 end
