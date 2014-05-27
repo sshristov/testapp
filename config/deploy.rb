@@ -45,6 +45,7 @@ set :format, :pretty
 namespace :deploy do
 
   desc 'Restart application'
+
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
@@ -60,6 +61,7 @@ namespace :deploy do
        #Here we can do anything such as:
          within release_path do
          execute :rake, 'db:migrate'
+	 execute 'rails s &'
        end
     end
   end
