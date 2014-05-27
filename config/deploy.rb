@@ -73,15 +73,11 @@ desc 'Runs rake db:create'
 
 end
 
-namespace :rake_task do
-  task :invoke do
-    if ENV['COMMAND'].to_s.strip == ''
-      puts "USAGE: cap rake_task:invoke COMMAND='db:migrate'" 
-    else
-      run "cd #{current_path} && RAILS_ENV=production rake #{ENV['COMMAND']}"
-    end
-  end                           
-end 
+namespace :rake do
+  task :show_tasks do
+    run("cd #{deploy_to}/current; /usr/bin/rake -T")
+  end
+end
 
 
 
