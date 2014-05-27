@@ -73,11 +73,17 @@ desc 'Runs rake db:create'
 
 end
 
-namespace :rake do
-  task :show_tasks do
-    run("cd /home/deployer/apps/testapp/current; /usr/local/rvm/gems/ruby-2.1.1/bin/rake db:migrate")
-  end
-end
+
+desc 'Runs rake db:migrate'
+    task :migrate => [:set_rails_env] do
+      on primary fetch(:migration_role) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, "db:migrate RAILS_ENV=#{fetch(:rails_env)}"
+          end
+        end
+      end
+    end
 
 
 
