@@ -57,18 +57,6 @@ desc 'Runs rake db:create'
       end
     end
 
-desc 'Runs rake db:create'
-    task :create => [:set_rails_env] do
-      on primary fetch(:migration_role) do
-        within release_path do
-            execute :rake, "db:migrate RAILS_ENV=#{fetch(:rails_env)}"
-          end
-        end
-      end
-    end
-
-
-
 
 
   desc 'Restart application'
@@ -89,7 +77,3 @@ desc 'Runs rake db:create'
   end
 
 end
-
-
-
-
