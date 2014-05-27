@@ -11,6 +11,11 @@ set :pty, true
 set :format, :pretty
 
 
+require 'bundler/capistrano'
+require 'rvm/capistrano'
+
+set :rvm_ruby_string, "ruby-2.0.0p481"
+set :rvm_type, 'webadmin'
 
 
 
