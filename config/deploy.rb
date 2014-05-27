@@ -57,7 +57,7 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
        #Here we can do anything such as:
-         within /home/deployer/apps/testapp/current do
+         #within /home/deployer/apps/testapp/current do
          execute :rake, 'db:migrate'
        end
     end
