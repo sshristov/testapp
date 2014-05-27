@@ -41,3 +41,23 @@ set :format, :pretty
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+
+require 'sshkit/dsl'
+
+SSHKit.config.command_map[:rake] = "./bin/rake"
+
+desc "Deploy the site, pulls from Git, migrate the db and precompile assets, then restart Passenger."
+task :deploy do
+  on "example.com" do |host|
+    within "/opt/sites/example.com" do
+      execute :git, :pull
+      execute :bundle, :install, '--deployment'
+      execute :rake, 'db:migrate'
+      execute :rake, 'assets:precompile'
+      execute :touch, 'tmp/restart.txt'
+    end
+  end
+end
+
+
+
