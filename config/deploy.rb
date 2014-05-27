@@ -44,13 +44,13 @@ set :format, :pretty
 
 namespace :deploy do
 
-  #desc 'Restart application'
-  #task :restart do
-  #  on roles(:app), in: :sequence, wait: 5 do
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
- #      execute :touch, release_path.join('tmp/restart.txt')
- #   end
- # end
+       execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
 
   after :publishing, :restart
 
@@ -65,10 +65,5 @@ namespace :deploy do
 
 end
 
-desc "Restart Passenger app"
-task :restart do
-    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
-end
 
-after "deploy", "deploy:restart"
 
