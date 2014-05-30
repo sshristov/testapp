@@ -3,7 +3,7 @@ set :repository,  "git://github.com/sshristov/testapp.git"
  
 set :user, :deployer
  
-set :deploy_to, "/home/deployer/apps/#{application}"
+set :deploy_to, "/home/deployer/apps/testapp"
  
 set :use_sudo, false
  
