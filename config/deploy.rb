@@ -26,7 +26,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       #execute :touch, 'tmp/restart.txt'
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
-      execute :kill, '-9', '3000'
+      execute :kill, '-9', 'ruby'
     end
   end
 
