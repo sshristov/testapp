@@ -38,7 +38,7 @@ namespace :deploy do
          within release_path do
          execute :rake, 'db:migrate' #'rails s'
 	 #execute :rails, 'rails s'
-	 execute 'rails s'
+	 execute :rails, 's'
        end
     end
   end
