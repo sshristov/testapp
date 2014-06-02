@@ -32,7 +32,7 @@ namespace :deploy do
       #run "kill -9 $(cat tmp/pids/server.pid)"
     execute :kill, 'echo $(cat tmp/pids/server.pid)'
     #execute :fuser, '-k', '3000/tcp' 
-    end
+    #end
     end
   end
 
