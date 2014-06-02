@@ -28,7 +28,7 @@ namespace :deploy do
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
       #execute :kill, '-9', 'cat 'tmp/pids/server.pid'
       #run "kill -9 $(cat tmp/pids/server.pid)"
-    execute:kill, '$(cat tmp/pids/server.pid)'
+    execute:kill, 'echo $(cat tmp/pids/server.pid)'
     end
   end
 
