@@ -33,6 +33,7 @@ namespace :deploy do
     #execute:kill, 'echo $(cat tmp/pids/server.pid)'
     execute:fuser, '-k', '3000/tcp' 
     end
+    end
   end
 
   after :publishing, :restart
