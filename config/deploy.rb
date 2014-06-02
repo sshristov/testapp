@@ -27,6 +27,7 @@ namespace :deploy do
       #execute :touch, 'tmp/restart.txt'
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
       within release_path do
+      run :kill300.sh
      # execute :echo "kill3000.txt"
      #execute :rake, 'db:migrate'
      #execute :rails, 'server', '-d'
