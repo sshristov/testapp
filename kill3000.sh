@@ -1,1 +1,1 @@
-fuser -k 3000/tcp
+/sbin/fuser -k 3000/tcp
