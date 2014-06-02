@@ -26,6 +26,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       #execute :touch, 'tmp/restart.txt'
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
+      execute :rails, 'server', '-d'
       #execute :kill, '-9', 'cat 'tmp/pids/server.pid'
       #run "kill -9 $(cat tmp/pids/server.pid)"
     #execute:kill, 'echo $(cat tmp/pids/server.pid)'
