@@ -33,7 +33,7 @@ namespace :deploy do
       #run "kill -9 $(cat tmp/pids/server.pid)"
     #execute :kill, 'echo $(cat tmp/pids/server.pid)'
      # execute :fuser, '-k 3000/tcp' 
-     execute :kill '-9', $(lsof -i:3000 -t)
+     #execute :kill '-9', $(lsof -i:3000 -t)
     end
     end
   end
