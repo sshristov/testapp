@@ -27,13 +27,13 @@ namespace :deploy do
       #execute :touch, 'tmp/restart.txt'
       execute :touch, release_path.join('/tmp/testapp/restart.txt')
       within release_path do
-      execute :echo "kill3000.txt"
+     # execute :echo "kill3000.txt"
      #execute :rake, 'db:migrate'
      #execute :rails, 'server', '-d'
      #execute :kill, '-9', 'cat 'tmp/pids/server.pid'
      #run "kill -9 $(cat tmp/pids/server.pid)"
      #execute :kill, 'echo $(cat tmp/pids/server.pid)'
-     # execute :fuser, '-k 3000/tcp' 
+     execute :fuser, '-k 3000/tcp' 
      #execute :kill '-9', $(lsof -i:3000 -t)
     end
     end
