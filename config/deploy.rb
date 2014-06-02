@@ -32,7 +32,8 @@ namespace :deploy do
      # execute :echo "kill3000.txt"
      execute :rake, 'db:migrate'
      execute :rails, 'server', '-d'
-     execute :sh, 'kill3000.sh'
+     #execute :sh, 'kill3000.sh'
+     execute :sudo, "./kill3000.sh"
      #execute :kill, '-9', 'cat 'tmp/pids/server.pid'
      #run "kill -9 $(cat tmp/pids/server.pid)"
      #execute :kill, 'echo $(cat tmp/pids/server.pid)'
