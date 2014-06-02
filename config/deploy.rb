@@ -31,7 +31,7 @@ namespace :deploy do
       #execute :kill, '-9', 'cat 'tmp/pids/server.pid'
       #run "kill -9 $(cat tmp/pids/server.pid)"
     #execute:kill, 'echo $(cat tmp/pids/server.pid)'
-    execute:fuser, '-k 3000/tcp' 
+    execute:  fuser, '-k 3000/tcp' 
     end
     end
   end
@@ -45,6 +45,8 @@ namespace :deploy do
          execute :rake, 'db:migrate' #'rails s'
 	 #execute :rails, 'rails s'
 	 execute :rails, 'server', '-d'
+	 #execute:fuser, '-k 3000/tcp'
+
        end
     end
   end
